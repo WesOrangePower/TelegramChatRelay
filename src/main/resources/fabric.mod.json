@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "telegramchatrelay",
+  "version": "${version}",
+  "name": "TelegramChatRelay",
+  "description": "Mc chat to telegram",
+  "authors": [
+    "WesOrangePower"
+  ],
+  "contact": {
+    "homepage": "https://shitcoding.agency/",
+    "sources": "https://github.com/WesOrangePower/telegram-chat-relay.git"
+  },
+  "license": "Apache License 2.0",
+  "icon": "assets/telegramchatrelay/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.wesorangepower.telegramchatrelay.TelegramChatRelay"
+    ]
+  },
+  "mixins": [
+    "telegramchatrelay.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.13.1",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}
