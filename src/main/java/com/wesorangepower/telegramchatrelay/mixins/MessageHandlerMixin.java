@@ -19,7 +19,7 @@ public class MessageHandlerMixin
     @Inject(method = "onGameMessage", at = @At(value = "HEAD"))
     private void addChatMessage(GameMessageS2CPacket packet, CallbackInfo ci)
     {
-        var rawMessage = packet.getMessage().getString();
+        var rawMessage = packet.content().getString();
         if (!q.contains(rawMessage))
         {
             q.add(rawMessage);

@@ -129,7 +129,13 @@ public class LocalTelegramBot
 
             if (MinecraftClient.getInstance().player != null)
             {
-                MinecraftClient.getInstance().player.sendChatMessage(text);
+                if (text.startsWith("/"))
+                {
+                    MinecraftClient.getInstance().player.sendCommand(text);
+                } else
+                {
+                    MinecraftClient.getInstance().player.sendChatMessage(text, Text.of(text));
+                }
             }
         }
     }
