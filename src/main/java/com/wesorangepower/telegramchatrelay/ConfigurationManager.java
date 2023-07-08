@@ -11,22 +11,21 @@ import net.minecraft.text.Text;
 
 import java.io.*;
 import java.util.List;
-import java.util.Properties;
 
 @SuppressWarnings("rawtypes")
 public class ConfigurationManager
 {
     public static final String FILENAME = "config/telegram-chat-relay.json";
 
-    private ModConfiguration configuration;
+    private final ModConfiguration configuration;
 
-    private static ConfigurationManager INSTANCE;
+    private static ConfigurationManager instance;
 
     public static ConfigurationManager getInstance()
     {
-        if (INSTANCE == null)
-            INSTANCE = new ConfigurationManager();
-        return INSTANCE;
+        if (instance == null)
+            instance = new ConfigurationManager();
+        return instance;
     }
 
     private ConfigurationManager()
@@ -39,11 +38,9 @@ public class ConfigurationManager
         var file = new File(FILENAME);
         var gson = new Gson();
         var output = gson.toJson(configuration);
-        try
+        try (var writer = new FileWriter(file))
         {
-            var writer = new FileWriter(file);
             writer.write(output);
-            writer.close();
         }
         catch (IOException e)
         {
@@ -63,9 +60,10 @@ public class ConfigurationManager
             {
                 config = getDefaultConfig();
                 var output = gson.toJson(config);
-                var writer = new FileWriter(file);
-                writer.write(output);
-                writer.close();
+                try (var writer = new FileWriter(file);)
+                {
+                    writer.write(output);
+                }
             }
 
             var reader = new FileReader(file);

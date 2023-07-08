@@ -11,7 +11,7 @@ public interface ChatMessageCallBack {
      * Called before a text message is displayed.
      */
     Event<ChatMessageCallBack> EVENT = EventFactory.createArrayBacked(ChatMessageCallBack.class,
-        (listeners) -> (message) -> {
+        listeners -> message -> {
             for (ChatMessageCallBack listener : listeners) {
                 ActionResult result = listener.onChatMessage(message);
 
